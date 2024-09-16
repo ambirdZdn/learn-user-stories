@@ -43,4 +43,23 @@ export default class Bank {
         this.accounts.push(account);
         return account;
     }
+
+    /**
+     * Method to deposit money into a bank account
+     * @param accountNumber The account number of the bank account
+     * @param amount The amount to deposit
+     * @returns The updated bank account
+     */
+    public deposit(accountNumber: string, amount: number): string {
+        const account = this.findAccount(accountNumber);
+        if (!account) {
+             throw new Error("Account not found");
+        }
+        const MIN_DEPOSIT_AMOUNT = 10; // Define a minimum deposit amount
+        if (amount < MIN_DEPOSIT_AMOUNT) {
+             throw new Error("Error: Deposit amount too low. Minimum deposit is $10.");
+        }
+        account.balance += amount;
+        return `Deposit successful. New balance: $${account.balance}`;
+    }
 }
