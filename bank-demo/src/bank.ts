@@ -62,4 +62,26 @@ export default class Bank {
         account.balance += amount;
         return `Deposit successful. New balance: $${account.balance}`;
     }
+
+     /**
+     * Method to withdraw money from a bank account
+     * @param accountNumber The account number of the bank account
+     * @param amount The amount to withdraw
+     * @returns A confirmation message with the updated balance
+     */
+     public withdraw(accountNumber: string, amount: number): string {
+        const account = this.findAccount(accountNumber);
+        if (!account) {
+            throw new Error("Account not found");
+        }
+        const MAX_WITHDRAWAL_AMOUNT = 10000; // Define a maximum withdrawal amount
+        if (amount > MAX_WITHDRAWAL_AMOUNT) {
+            throw new Error("Can't withdraw more than $10,000 at a time");
+        }
+        if (amount > account.balance) {
+            throw new Error("Insufficient funds");
+        }
+        account.balance -= amount;
+        return `Withdrawal successful. New balance: $${account.balance}`;
+    }
 }
