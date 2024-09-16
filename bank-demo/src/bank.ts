@@ -84,4 +84,17 @@ export default class Bank {
         account.balance -= amount;
         return `Withdrawal successful. New balance: $${account.balance}`;
     }
+
+    /**
+     * Method to check the balance of a bank account
+     * @param accountNumber The account number of the bank account
+     * @returns The balance of the bank account
+     */
+    public checkBalance(accountNumber: string): string {
+        const account = this.findAccount(accountNumber);
+        if (!account) {
+            throw new Error("Account not found");
+        }
+        return `Current balance: $${account.balance}`;
+    }
 }
